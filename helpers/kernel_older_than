@@ -1,0 +1,13 @@
+#!/bin/sh
+
+. bootrr
+
+target_version="$@"
+kernel_version=$(uname -r | awk -F- '{print $1}')
+
+if [ "$(version "$kernel_version")" -lt "$(version "$target_version")" ]; then
+   exit 0
+fi
+
+exit 1
+

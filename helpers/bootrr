@@ -13,6 +13,11 @@ timeout() {
 	return 1
 }
 
+# Each separate version number must be less than 3 digit wide
+version() {
+    echo "$@" | awk -F. '{ printf("%03d%03d%03d\n", $1,$2,$3); }';
+}
+
 test_report_exit() {
 	TEST_RESULT=$1
 	command -v lava-test-case
