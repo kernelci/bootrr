@@ -1,0 +1,33 @@
+#!/bin/sh
+
+assert_driver_present armv8-pmu-driver-present armv8-pmu
+assert_device_present armv8-pmu-a53-probed armv8-pmu pmu_a53
+assert_device_present armv8-pmu-a72-probed armv8-pmu pmu_a72
+
+assert_driver_present cros-ec-debugfs-driver-present cros-ec-debugfs
+assert_device_present cros-ec-debugfs-probed cros-ec-debugfs cros-ec-debugfs.*
+assert_sysfs_attr_present cros-ec-debugfs-attr-console_log /sys/kernel/debug/cros_ec/console_log
+assert_sysfs_attr_present cros-ec-debugfs-attr-pdinfo /sys/kernel/debug/cros_ec/pdinfo
+
+assert_driver_present cros-ec-dev-driver-present cros-ec-dev
+assert_device_present cros-ec-dev-probed cros-ec-dev cros-ec-dev.*
+
+assert_driver_present cros-ec-lightbar-driver-present cros-ec-lightbar
+
+assert_driver_present cros-ec-sysfs-driver-present cros-ec-sysfs
+assert_device_present cros-ec-sysfs-probed cros-ec-sysfs cros-ec-sysfs.*
+assert_sysfs_attr_present cros-ec-sysfs-attr-flashinfo /sys/class/chromeos/cros_ec/flashinfo
+assert_sysfs_attr_present cros-ec-sysfs-attr-kb_wake_angle /sys/class/chromeos/cros_ec/kb_wake_angle
+assert_sysfs_attr_present cros-ec-sysfs-attr-version /sys/class/chromeos/cros_ec/version
+
+assert_driver_present clk-mt8173-mm-driver-present clk-mt8173-mm
+assert_device_present clk-mt8173-mm-probed clk-mt8173-mm clk-mt8173-mm.*
+
+assert_driver_present mediatek-mt8173-pinctrl-driver-present mediatek-mt8173-pinctrl
+assert_device_present mediatek-mt8173-pinctrl-probed mediatek-mt8173-pinctrl 1000b000.*
+
+assert_driver_present mt6577-uart-driver-present mt6577-uart
+assert_device_present mt6577-uart-probed mt6577-uart 11002000.*
+
+assert_driver_present mtk-mmsys-driver-present mtk-mmsys
+assert_device_present mtk-mmsys-probed mtk-mmsys 14000000.*
