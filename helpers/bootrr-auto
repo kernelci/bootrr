@@ -2,7 +2,15 @@
 
 $(pwd)/helpers/bootrr-generic-tests
 
-for TEST in $(tr "\0" "\n" < /proc/device-tree/compatible); do
+if [ -f "/sys/class/dmi/id/product_name" ]; then
+	vendor="$(cat /sys/class/dmi/id/sys_vendor)"
+	product="$(cat /sys/class/dmi/id/product_name)"
+	BOARD="$(echo ${vendor},${product} | tr '[:upper:]' '[:lower:]')"
+else
+	BOARD="$(tr '\0' '\n' < /proc/device-tree/compatible)"
+fi
+
+for TEST in ${BOARD}; do
 	if [ -x "$(pwd)/boards/${TEST}" ]; then
 		$(pwd)/boards/${TEST}
 	fi
