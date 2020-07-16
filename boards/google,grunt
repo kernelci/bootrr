@@ -1,0 +1,19 @@
+#!/bin/sh
+
+assert_driver_present ac-driver-present ac
+assert_device_present ac-device-probed ac ACPI0003*
+
+assert_driver_present battery-driver-present battery
+assert_device_present battery-device-probed battery PNP0C0A*
+
+assert_driver_present button-driver-present button
+assert_device_present button-device-probed button LNXPWRBN*
+
+assert_driver_present ec-driver-present ec
+assert_device_present ec-device-probed ec PNP0C09*
+
+assert_driver_present thermal-driver-present thermal
+assert_device_present thermal-device-probed thermal LNXTHERM*
+
+assert_driver_present video-driver-present video
+assert_device_present video-device-probed video LNXVIDEO*
