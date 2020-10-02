@@ -22,6 +22,8 @@ HELPERS := assert_file_is_empty \
 	   state_check
 
 BOARDS := arrow,apq8096-db820c \
+	  google,grunt \
+	  google,hana \
 	  google,kevin \
 	  google,pi \
 	  google,veyron-jaq \
