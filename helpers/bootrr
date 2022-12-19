@@ -2,11 +2,10 @@
 
 timeout() {
 	attempts="$1"; shift
-	cmd="$@"
 
 	for i in `seq ${attempts}`
 	do
-		$cmd && return 0 
+		"$@" && return 0
 		sleep 1
 	done
 
