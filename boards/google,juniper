@@ -1,0 +1,272 @@
+#!/bin/sh
+
+# The following are present in the devicetree but their config wasn't enabled in
+# ChromeOS, suggesting that they don't provide any meaningful functionality, and
+# therefore were left out from the tests:
+# - Driver: mtk-pmic-keys; config: KEYBOARD_MTK_PMIC
+# - Driver: mtk_mt6765; config: MTK_TIMER
+
+# Clocks
+assert_driver_present clk-mt8183-driver-present clk-mt8183
+assert_device_present clk-mt8183-mcucfg-probed clk-mt8183 c530000.*
+assert_device_present clk-mt8183-topckgen-probed clk-mt8183 10000000.*
+assert_device_present clk-mt8183-infracfg-probed clk-mt8183 10001000.*
+assert_device_present clk-mt8183-pericfg-probed clk-mt8183 10003000.*
+assert_device_present clk-mt8183-apmixedsys-probed clk-mt8183 1000c000.*
+
+assert_driver_present clk-mt8183-mfg-driver-present clk-mt8183-mfg
+assert_device_present clk-mt8183-mfg-probed clk-mt8183-mfg 13000000.*
+
+assert_driver_present mtk-mmsys-driver-present mtk-mmsys
+assert_device_present mtk-mmsys-probed mtk-mmsys 14000000.*
+
+assert_driver_present clk-mt8183-img-driver-present clk-mt8183-img
+assert_device_present clk-mt8183-img-probed clk-mt8183-img 15020000.*
+
+assert_driver_present clk-mt8183-vdec-driver-present clk-mt8183-vdec
+assert_device_present clk-mt8183-vdec-probed clk-mt8183-vdec 16000000.*
+
+assert_driver_present clk-mt8183-venc-driver-present clk-mt8183-venc
+assert_device_present clk-mt8183-venc-probed clk-mt8183-venc 17000000.*
+
+assert_driver_present clk-mt8183-ipu_conn-driver-present clk-mt8183-ipu_conn
+assert_device_present clk-mt8183-ipu_conn-probed clk-mt8183-ipu_conn 19000000.*
+
+assert_driver_present clk-mt8183-ipu_adl-driver-present clk-mt8183-ipu_adl
+assert_device_present clk-mt8183-ipu_adl-probed clk-mt8183-ipu_adl 19010000.*
+
+assert_driver_present clk-mt8183-ipu_core0-driver-present clk-mt8183-ipu_core0
+assert_device_present clk-mt8183-ipu_core0-probed clk-mt8183-ipu_core0 19180000.*
+
+assert_driver_present clk-mt8183-ipu_core1-driver-present clk-mt8183-ipu_core1
+assert_device_present clk-mt8183-ipu_core1-probed clk-mt8183-ipu_core1 19280000.*
+
+assert_driver_present clk-mt8183-cam-driver-present clk-mt8183-cam
+assert_device_present clk-mt8183-cam-probed clk-mt8183-cam 1a000000.*
+
+# Power
+assert_driver_present mtk-power-controller-driver-present mtk-power-controller
+assert_device_present mtk-power-controller-probed mtk-power-controller 10006000.*
+
+assert_driver_present mt-pmic-pwrap-driver-present mt-pmic-pwrap
+assert_device_present mt-pmic-pwrap-probed mt-pmic-pwrap 1000d000.*
+
+assert_driver_present mt6397-driver-present mt6397
+assert_device_present mt6397-probed mt6397 1000d000.*
+
+assert_driver_present mt6358-regulator-driver-present mt6358-regulator
+assert_device_present mt6358-regulator-probed mt6358-regulator mt6358-regulator
+
+assert_driver_present mt6397-rtc-driver-present mt6397-rtc
+assert_device_present mt6397-rtc-probed mt6397-rtc mt6358-rtc
+
+# Pinctrl
+assert_driver_present mt8183-pinctrl-driver-present mt8183-pinctrl
+assert_device_present mt8183-pinctrl-probed mt8183-pinctrl 10005000.*
+
+# I2C
+assert_driver_present i2c-mt65xx-driver-present i2c-mt65xx
+assert_device_present i2c0-mt65xx-probed i2c-mt65xx 11007000.*
+assert_device_present i2c2-mt65xx-probed i2c-mt65xx 11009000.*
+assert_device_present i2c4-mt65xx-probed i2c-mt65xx 11008000.*
+assert_device_present i2c5-mt65xx-probed i2c-mt65xx 11016000.*
+
+# SPI
+assert_driver_present mtk-spi-driver-present mtk-spi
+assert_device_present mtk-spi0-probed mtk-spi 1100a000.*
+assert_device_present mtk-spi1-probed mtk-spi 11010000.*
+assert_device_present mtk-spi2-probed mtk-spi 11012000.*
+
+# UART
+assert_driver_present mt6577-uart-driver-present mt6577-uart
+assert_device_present mt6577-uart0-probed mt6577-uart 11002000.*
+
+# IOMMU
+assert_driver_present mtk-iommu-driver-present mtk-iommu
+assert_device_present mtk-iommu-probed mtk-iommu 10205000.*
+
+assert_driver_present mtk-smi-common-driver-present mtk-smi-common
+assert_device_present mtk-smi-common-probed mtk-smi-common 14019000.*
+
+assert_driver_present mtk-smi-larb-driver-present mtk-smi-larb
+assert_device_present mtk-smi-larb0-probed mtk-smi-larb 14017000.*
+assert_device_present mtk-smi-larb5-probed mtk-smi-larb 15021000.*
+assert_device_present mtk-smi-larb2-probed mtk-smi-larb 1502f000.*
+assert_device_present mtk-smi-larb1-probed mtk-smi-larb 16010000.*
+assert_device_present mtk-smi-larb4-probed mtk-smi-larb 17010000.*
+assert_device_present mtk-smi-larb6-probed mtk-smi-larb 1a001000.*
+assert_device_present mtk-smi-larb3-probed mtk-smi-larb 1a002000.*
+
+# ChromeOS EC
+assert_driver_present cros-ec-spi-driver-present cros-ec-spi
+assert_device_present cros-ec-spi-probed cros-ec-spi spi2.0
+
+assert_driver_present cros-ec-i2c-tunnel-driver-present cros-ec-i2c-tunnel
+assert_device_present cros-ec-i2c-tunnel-probed cros-ec-i2c-tunnel 11012000.*
+
+assert_driver_present extcon-usbc-cros-ec-driver-present extcon-usbc-cros-ec
+assert_device_present extcon-usbc-cros-ec-probed extcon-usbc-cros-ec 11012000.*
+
+assert_driver_present cros-ec-typec-driver-present cros-ec-typec
+assert_device_present cros-ec-typec-probed cros-ec-typec 11012000.*
+
+# Touchpad
+assert_driver_present i2c_hid_of-driver-present i2c_hid_of
+assert_device_present i2c_hid_of-probed i2c_hid_of 2-002c
+
+# Touchscreen
+assert_driver_present elants_i2c-driver-present elants_i2c
+assert_device_present elants_i2c-probed elants_i2c 0-0010
+
+# Keys
+assert_driver_present gpio-keys-driver-present gpio-keys
+assert_device_present gpio-keys-volume-probed gpio-keys volume-buttons
+
+# Display
+assert_driver_present mediatek-mipi-tx-driver-present mediatek-mipi-tx
+assert_device_present mediatek-mipi-tx-probed mediatek-mipi-tx 11e50000.*
+
+assert_driver_present mtk-dsi-driver-present mtk-dsi
+assert_device_present mtk-dsi-probed mtk-dsi 14014000.*
+
+assert_driver_present anx7625-driver-present anx7625
+assert_device_present anx7625-probed anx7625 4-0058
+
+assert_driver_present mediatek-disp-pwm-driver-present mediatek-disp-pwm
+assert_device_present mediatek-disp-pwm-probed mediatek-disp-pwm 1100e000.*
+
+assert_driver_present pwm-backlight-driver-present pwm-backlight
+assert_device_present pwm-backlight-probed pwm-backlight backlight_lcd0
+
+assert_driver_present panel-edp-driver-present panel-edp
+assert_device_present panel-edp-probed panel-edp panel
+
+assert_driver_present mediatek-mutex-driver-present mediatek-mutex
+assert_device_present mediatek-mutex-probed mediatek-mutex 14016000.*
+
+assert_driver_present mtk_cmdq-driver-present mtk_cmdq
+assert_device_present mtk_cmdq-probed mtk_cmdq 10238000.*
+
+assert_driver_present mediatek-disp-ovl-driver-present mediatek-disp-ovl
+assert_device_present mediatek-disp-ovl0-probed mediatek-disp-ovl 14008000.*
+assert_device_present mediatek-disp-ovl2l0-probed mediatek-disp-ovl 14009000.*
+assert_device_present mediatek-disp-ovl2l1-probed mediatek-disp-ovl 1400a000.*
+
+assert_driver_present mediatek-disp-rdma-driver-present mediatek-disp-rdma
+assert_device_present mediatek-disp-rdma0-probed mediatek-disp-rdma 1400b000.*
+assert_device_present mediatek-disp-rdma1-probed mediatek-disp-rdma 1400c000.*
+
+assert_driver_present mediatek-disp-color-driver-present mediatek-disp-color
+assert_device_present mediatek-disp-color-probed mediatek-disp-color 1400e000.*
+
+assert_driver_present mediatek-disp-ccorr-driver-present mediatek-disp-ccorr
+assert_device_present mediatek-disp-ccorr-probed mediatek-disp-ccorr 1400f000.*
+
+assert_driver_present mediatek-disp-aal-driver-present mediatek-disp-aal
+assert_device_present mediatek-disp-aal-probed mediatek-disp-aal 14010000.*
+
+assert_driver_present mediatek-disp-gamma-driver-present mediatek-disp-gamma
+assert_device_present mediatek-disp-gamma-probed mediatek-disp-gamma 14011000.*
+
+assert_driver_present mediatek-drm-driver-present mediatek-drm
+assert_device_present mediatek-drm-probed mediatek-drm mediatek-drm.*.auto
+
+# Codecs
+assert_driver_present mtk-scp-driver-present mtk-scp
+assert_device_present mtk-scp-probed mtk-scp 10500000.*
+
+assert_driver_present mtk-jpeg-driver-present mtk-jpeg
+assert_device_present mtk-jpeg-probed mtk-jpeg 17030000.*
+
+# eFuse
+assert_driver_present mediatek,efuse-driver-present mediatek,efuse
+assert_device_present mediatek,efuse-probed mediatek,efuse 8000000.*
+
+# TPM
+assert_driver_present tpm_tis_spi-driver-present tpm_tis_spi
+assert_device_present tpm_tis_spi-probed tpm_tis_spi spi0.0
+
+# NOR flash
+assert_driver_present spi-nor-driver-present spi-nor
+assert_device_present spi-nor-probed spi-nor spi1.0
+
+# USB
+assert_driver_present mtk-tphy-driver-present mtk-tphy
+assert_device_present mtk-tphy-probed mtk-tphy *11f40000
+
+assert_driver_present mtu3-driver-present mtu3
+assert_device_present mtu3-probed mtu3 11201000.*
+
+assert_driver_present xhci-mtk-driver-present xhci-mtk
+assert_device_present xhci-mtk-probed xhci-mtk 11200000.*
+
+# Bluetooth
+assert_device_present mt6577-uart1-probed mt6577-uart 11003000.*
+
+assert_driver_present hci_uart_qca-driver-present hci_uart_qca
+assert_device_present hci_uart_qca-probed hci_uart_qca serial0-0
+
+assert_driver_present bt-sco-driver-present bt-sco
+assert_device_present bt-sco-probed bt-sco bt-sco
+
+# CCI
+assert_driver_present mtk-ccifreq-driver-present mtk-ccifreq
+assert_device_present mtk-ccifreq-probed mtk-ccifreq cci
+
+# PMU
+assert_driver_present armv8-pmu-driver-present armv8-pmu
+assert_device_present armv8-pmu-a53-probed armv8-pmu pmu-a53
+assert_device_present armv8-pmu-a73-probed armv8-pmu pmu-a73
+
+# Watchdog
+assert_driver_present mtk-wdt-driver-present mtk-wdt
+assert_device_present mtk-wdt-probed mtk-wdt 10007000.*
+
+# Thermal
+assert_driver_present mt6577-auxadc-driver-present mt6577-auxadc
+assert_device_present mt6577-auxadc-probed mt6577-auxadc 11001000.*
+
+assert_driver_present generic-adc-thermal-driver-present generic-adc-thermal
+assert_device_present generic-adc-thermal-probed generic-adc-thermal thermal-sensor1
+assert_device_present generic-adc-thermal-probed generic-adc-thermal thermal-sensor2
+
+assert_driver_present mtk-thermal-driver-present mtk-thermal
+assert_device_present mtk-thermal-probed mtk-thermal 1100b000.*
+
+assert_driver_present mtk-svs-driver-present mtk-svs
+assert_device_present mtk-svs-probed mtk-svs 1100b000.*
+
+# MMC
+assert_driver_present mtk-msdc-driver-present mtk-msdc
+assert_device_present mtk-msdc0-probed mtk-msdc 11230000.*
+
+# WiFi
+assert_device_present mtk-msdc1-probed mtk-msdc 11240000.*
+
+assert_device_present gpio-keys-wifi-probed gpio-keys wifi-wakeup
+
+assert_driver_present pwrseq_simple-driver-present pwrseq_simple
+assert_device_present pwrseq_simple-probed pwrseq_simple wifi-pwrseq
+
+assert_driver_present ath10k_sdio-driver-present ath10k_sdio
+assert_device_present ath10k_sdio-probed ath10k_sdio mmc1:*
+
+# Audio
+assert_driver_present mt8183-audio-driver-present mt8183-audio
+assert_device_present mt8183-audio-probed mt8183-audio 11220000.*
+
+assert_driver_present max98357a-driver-present max98357a
+assert_device_present max98357a-probed max98357a max98357a
+
+assert_driver_present ts3a227e-driver-present ts3a227e
+assert_device_present ts3a227e-probed ts3a227e 5-003b
+
+assert_driver_present mt6358-sound-driver-present mt6358-sound
+assert_device_present mt6358-sound-probed mt6358-sound mt6358-sound
+
+assert_driver_present mt8183_mt6358_ts3a227-driver-present mt8183_mt6358_ts3a227
+assert_device_present mt8183_mt6358_ts3a227-probed mt8183_mt6358_ts3a227 mt8183-sound
+
+# GPU
+assert_driver_present panfrost-driver-present panfrost
+assert_device_present panfrost-probed panfrost 13040000.*
