@@ -7,3 +7,10 @@ assert_device_present at91_i2c-i2c1-probed at91_i2c e0070600.*
 assert_driver_present sfp-driver-present sfp
 assert_device_present sfp-sfp0-probed sfp sfp0
 assert_device_present sfp-sfp1-probed sfp sfp1
+
+assert_mdio_device_present mdio0-phy0-probed e200413c.mdio-mii:01
+assert_mdio_device_present mdio0-phy1-probed e200413c.mdio-mii:02
+assert_mdio_device_present mdio0-phy4-probed e2004118.mdio-mii:05
+assert_mdio_device_present mdio0-phy5-probed e2004118.mdio-mii:06
+assert_mdio_device_present mdio0-phy6-probed e2004118.mdio-mii:07
+assert_mdio_device_present mdio0-phy7-probed e2004118.mdio-mii:08
