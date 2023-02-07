@@ -112,8 +112,8 @@ assert_device_present rockchip-typec-phy0-probed rockchip-typec-phy ff7c0000.*
 assert_device_present rockchip-typec-phy1-probed rockchip-typec-phy ff800000.*
 
 assert_driver_present rockchip-usb2phy-driver-present rockchip-usb2phy
-assert_device_present rockchip-usb2phy0-probed rockchip-usb2phy ff770000.syscon:usb2-phy@e450
-assert_device_present rockchip-usb2phy1-probed rockchip-usb2phy ff770000.syscon:usb2-phy@e460
+assert_device_present rockchip-usb2phy0-probed rockchip-usb2phy ff770000.syscon:usb2phy@e450
+assert_device_present rockchip-usb2phy1-probed rockchip-usb2phy ff770000.syscon:usb2phy@e460
 
 assert_driver_present rockchip-vop-driver-present rockchip-vop
 assert_device_present rockchip-vop0-probed rockchip-vop ff8f0000.*
