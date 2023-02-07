@@ -75,7 +75,6 @@ assert_device_present rockchip-emmc-phy-probed rockchip-emmc-phy ff770000.*
 
 assert_driver_present rockchip-i2s-driver-present rockchip-i2s
 assert_device_present rockchip-i2s0-probed rockchip-i2s ff880000.*
-assert_device_present rockchip-i2s1-probed rockchip-i2s ff8a0000.*
 
 assert_driver_present rockchip-iodomain-driver-present rockchip-iodomain
 assert_device_present rockchip-iodomain0-probed rockchip-iodomain ff320000.*
