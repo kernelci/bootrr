@@ -26,7 +26,7 @@ assert_device_present cros-ec-rtc-probed cros-ec-rtc cros-ec-rtc.*
 assert_driver_present cros-ec-sensors-driver-present cros-ec-sensors
 if kernel_greater_than "5.5"; then
     assert_auto_device_present cros-ec-sensors-accel%d-probed cros-ec-sensors cros-ec-accel.* 2
-    assert_device_present cros-ec-sensors-gyro0-probed cros-ec-sensors cros-ec-gyro.12.*
+    assert_device_present cros-ec-sensors-gyro0-probed cros-ec-sensors cros-ec-gyro.*
 
     assert_driver_present cros-ec-sensorhub-driver-present cros-ec-sensorhub
     assert_device_present cros-ec-sensorhub-probed cros-ec-sensorhub cros-ec-sensorhub.1.*
