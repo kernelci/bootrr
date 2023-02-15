@@ -1,0 +1,35 @@
+#!/bin/sh
+
+. bootrr
+
+TEST_CASE_ID_FMT="$1"
+DRIVER="$2"
+DEVICE="$3"
+NR_DEVICES="$4"
+TIMEOUT="${5:-1}"
+
+if [ -z "${TEST_CASE_ID_FMT}" -o -z "${DRIVER}" -o -z "${DEVICE}" -o -z "${NR_DEVICES}" ]; then
+	echo "Usage: $0 <test-case-id-fmt> <driver> <device> <nr_devices> [<timeout>]"
+	exit 1
+fi
+
+timeout ${TIMEOUT} [ -d /sys/bus/*/drivers/${DRIVER} ] || test_report_exit blocked
+
+idx=0
+for link in /sys/bus/*/drivers/${DRIVER}/${DEVICE}.auto; do
+	device_name=$(basename "${link}")
+	TEST_CASE_ID=$(printf "${TEST_CASE_ID_FMT}" "${idx}")
+
+	if [ "${idx}" -ge "${NR_DEVICES}" ]; then
+		test_report_exit skip
+	fi
+
+	assert_device_present "${TEST_CASE_ID}" "${DRIVER}" "${device_name}" "${TIMEOUT}"
+
+	idx=$((idx + 1))
+done
+
+if [ "${idx}" -lt "${NR_DEVICES}" ]; then
+	TEST_CASE_ID=$(printf "${TEST_CASE_ID_FMT}" "${idx}")
+	test_report_exit fail
+fi
