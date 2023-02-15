@@ -15,7 +15,16 @@ TPM_DEV="/dev/tpm0"
 if test -c $TPM_DEV && which tpm2_getcap
 then
     export TPM2TOOLS_TCTI="device:$TPM_DEV"
-    timeout ${TIMEOUT} tpm2_getcap commands && test_report_exit pass
+	output=$(timeout ${TIMEOUT} tpm2_getcap commands 2>&1)
+	if [ $? -eq 0 ]; then
+		test_report_exit pass
+	fi
+
+	# The error message on TPM 1.2:
+	#   Unsupported device. The device is a TPM 1.2
+	if echo $output | grep -q "TPM 1.2"; then
+		test_report_exit skip
+	fi
 else
     test_report_exit skip
 fi
