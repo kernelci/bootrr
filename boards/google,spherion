@@ -11,7 +11,11 @@ assert_driver_present clk-mt8192-driver-present clk-mt8192
 assert_device_present clk-mt8192-topckgen-probed clk-mt8192 10000000.*
 assert_device_present clk-mt8192-infracfg-probed clk-mt8192 10001000.*
 assert_device_present clk-mt8192-pericfg-probed clk-mt8192 10003000.*
-assert_device_present clk-mt8192-apmixedsys-probed clk-mt8192 1000c000.*
+if kernel_greater_than "6.3"; then
+	assert_device_present clk-mt8192-apmixedsys-probed clk-mt8192-apmixed 1000c000.*
+else
+	assert_device_present clk-mt8192-apmixedsys-probed clk-mt8192 1000c000.*
+fi
 
 assert_driver_present clk-mt8192-aud-driver-present clk-mt8192-aud
 assert_device_present clk-mt8192-aud-probed clk-mt8192-aud 11210000.*
