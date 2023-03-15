@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 . bootrr
 
@@ -13,6 +13,12 @@ if [ -z "${TEST_CASE_ID}" -o -z "${DRIVER}" -o -z "${DEVICE}" ]; then
 fi
 
 timeout ${TIMEOUT} [ -d /sys/bus/*/drivers/${DRIVER} ] || test_report_exit blocked
-timeout ${TIMEOUT} [ -L /sys/bus/*/drivers/${DRIVER}/${DEVICE} ] || test_report_exit fail
+
+# If the device parameter is a glob pattern, run the test for each
+# device once expanded
+devices=(/sys/bus/*/drivers/${DRIVER}/${DEVICE})
+for path in "${devices[@]}"; do
+    timeout ${TIMEOUT} [ -L $path ] || test_report_exit fail
+done
 
 test_report_exit pass
